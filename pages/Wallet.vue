@@ -35,14 +35,12 @@ export default {
            
           })
           .then(response => {
-            console.log(`response.data = ${JSON.stringify(response)}`)
             console.log(`response.data.wallets = ${JSON.stringify(response.data.wallets)}`)
             this.$store.commit('walletTokens', response.data.wallets)
             console.log(this.$store.state.tokens)
             this.$router.push("/Wallet2")
           })
           .catch(error => {
-        //   console.log(response)    
           console.log(error)
           })
         

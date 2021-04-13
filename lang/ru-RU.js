@@ -2,6 +2,7 @@ export default {
   name: 'Имя',
   email: 'Email',
   password: 'Пароль',
+  loading: 'Подождите загрузку...',
   navbar: {
     wallet: 'Кошельки',
     login: 'Вход',

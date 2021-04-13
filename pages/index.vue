@@ -1,6 +1,6 @@
 <template>
 <div> 
-  <progress-bar v-if="$wait.any">Please wait...</progress-bar>  
+  <progress-bar v-if="$wait.any">{{$t('loading')}}</progress-bar>  
     <Navbar /> 
    
  </div> 

@@ -1,5 +1,7 @@
 <template >
+
   <div class="Desktop-2" >
+    
     <b-navbar class="navbar navbar-expand-lg navbar-dark">
        
         <b-navbar-brand href="/" class="bigwallet">

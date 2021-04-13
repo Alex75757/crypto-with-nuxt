@@ -2,6 +2,7 @@ export default {
   name: 'Name',
   email: 'Email',
   password: 'Password',
+  loading: 'Please wait...',
   navbar: {
     wallet: 'Wallets',
     login: 'Login',

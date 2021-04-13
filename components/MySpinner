@@ -1,0 +1,18 @@
+<template>
+  <div class="loading-spinner">
+    <v-icon name="refresh" spin="spin" />
+    <span>{{ $t('loading') }}</span>
+  </div>
+</template>
+
+<style scoped lang="scss">
+  .loading-spinner {
+    opacity: 0.5;
+    margin: 50px auto;
+    text-align: center;
+    .fa-icon {
+      vertical-align: middle;
+      margin-right: 10px;
+    }
+  }
+</style>

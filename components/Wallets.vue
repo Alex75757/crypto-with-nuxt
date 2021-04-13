@@ -1,7 +1,7 @@
 <template>
 
 <div>  
-<progress-bar v-if="$wait.any">Please wait...</progress-bar>
+<progress-bar v-if="$wait.any">{{$t('loading')}}</progress-bar>
   <div v-if="$store.state.success">
       <b-card-group deck class="Group13">    
           <b-card 

@@ -1,5 +1,9 @@
 <template>
-  <div  >
+<v-wait for="fetching data">
+    <my-waiter slot="waiting" /> 
+ 
+ <div  >
+    
     <b-form @submit="onSubmit">
     <b-form  class="Group13">
      <b-form-group>
@@ -52,9 +56,11 @@
       </b-button>
     </b-form>  
   </div>
+ </v-wait>  
 </template>
 
 <script>
+// import MySpinner from './MySpinner.vue'
 import axios from 'axios'
 export default {
   // name: 'AuthForm',
