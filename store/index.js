@@ -23,14 +23,7 @@ export const mutations = {
       },
 
       walletTokens(state, payload) {
-        //   for (let i in payload) {
-        //       console.log(`payload[i].title = ${payload[i].title}`)
-        //     debugger
-                state.tokens = payload
-                
-        //         // state.tokens = payload[i].balance
-        //         console.log(`state.tokens = ${state.tokens}`)
-        //   }
-      }
+                     state.tokens = payload
+      },
 }
 
