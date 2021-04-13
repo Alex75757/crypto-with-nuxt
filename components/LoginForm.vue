@@ -1,10 +1,11 @@
 <template>
   <div>
-    <b-form @submit="onSubmit" class="Group13">
-      <!-- <p >{{ $t('loginPage.head') }}</p> -->
+    <b-form @click="onSubmit">
+      <b-form  class="Group13">
+      
       <b-form-group>
         <b-form-input
-          id="input-email"
+          
           v-model="form.email"
           :placeholder="$t('email')"
           type="email"
@@ -14,25 +15,28 @@
 
       <b-form-group>
         <b-form-input
-          id="input-pass"
+          
           v-model="form.password"
           :placeholder="$t('password')"
           type="password"
-          aria-describedby="input-live-help input-live-feedback"
+          
           required
-          @blur="handleBlurPassword"
+          
         />
        
       </b-form-group>
     </b-form>
 
-    <b-button type="submit" variant="primary" class="Rect19">
+    <b-button type="submit"  variant="primary" class="Rect19">
         {{ $t('loginPage.loginButton') }}
       </b-button>
+    </b-form>
   </div>
 </template>
 
 <script>
+
+import axios from 'axios'
 export default {
   name: 'Login',
   data () {
@@ -40,8 +44,9 @@ export default {
      form: {
         email: '',
         password: ''
-      },
-      show: true,
+     },
+     token: []
+     
        
     }
     
@@ -50,11 +55,41 @@ export default {
   methods: {
     onSubmit (event) {
       event.preventDefault()
+
       console.log(JSON.stringify(this.form))
+
+      axios ({
+            method: 'post',
+            url: 'http://80.87.192.59:5252/api/auth/login',
+            data: {
+              email: this.form.email,
+              password: this.form.password
+            // Bearer: access_token,
+            }
+          })
+          .then(response => {
+            console.log(response.data)
+            console.log(response.status)
+            this.token = response.data
+            console.log(this.token)
+            console.log(this.token.success)
+            this.$store.commit('walletSuccess', response.data)
+            this.$store.commit('walletSuccessEmail', this.form.email)
+            this.$router.push("/Wallet")
+            console.log(`store.success = ${this.$store.state.success}`)
+          })
+          
+            
+          
+          .catch(error => {
+          console.log("Access denined")
+          console.log(error)
+
+          })
+        
+
     },
-    handleBlurPassword () {
-      this.passwordError = this.$t('registerPage.passwordError')
-    }
+    
   }
 }
 </script>

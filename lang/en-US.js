@@ -19,6 +19,7 @@ export default {
     head: 'Register',
     registerButton: 'Register',
     nameError: 'Name must be between 2 and 100 characters',
+    emailError: 'post must have @',
     passwordError: 'Password must be more than 5 characters'
   },
   wallet: {

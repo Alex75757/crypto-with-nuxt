@@ -19,6 +19,7 @@ export default {
     head: 'Регистрация',
     registerButton: 'Зарегистрироваться',
     nameError: 'Имя должно содержать от 2 до 100 символов',
+    emailError: 'почта должна быть с @',
     passwordError: 'Пароль должен содержать более 5 символов'
   },
   wallet: {

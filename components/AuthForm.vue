@@ -1,9 +1,10 @@
 <template>
   <div  >
-    <b-form class="Group13">
+    <b-form @submit="onSubmit">
+    <b-form  class="Group13">
      <b-form-group>
         <b-form-input
-          id="input-name"
+         
           v-model="form.name"
           :placeholder="$t('name')"
           aria-describedby="input-live-help input-live-feedback"
@@ -20,9 +21,14 @@
           id="input-email"
           v-model="form.email"
           :placeholder="$t('email')"
-          type="email"
-          required
+          aria-describedby="input-live-feedback"
+          
+          @blur="handleBlurEmail"
+          
         />
+        <b-form-invalid-feedback :state="validationEmail">
+          {{emailError}}
+        </b-form-invalid-feedback>
       </b-form-group>
 
       <b-form-group>
@@ -31,8 +37,8 @@
           v-model="form.password"
           :placeholder="$t('password')"
           type="password"
-          aria-describedby="input-live-help input-live-feedback"
-          required
+          aria-describedby="input-live-feedback"
+          
           @blur="handleBlurPassword"
         />
         <b-form-invalid-feedback :state="validationPassword">
@@ -44,13 +50,14 @@
      <b-button type="submit" variant="primary"  class="Rect19">
         {{ $t('registerPage.registerButton') }}
       </b-button>
+    </b-form>  
   </div>
 </template>
 
 <script>
-
+import axios from 'axios'
 export default {
-  name: 'AuthForm',
+  // name: 'AuthForm',
   data () {
     return {
       form: {
@@ -58,8 +65,9 @@ export default {
         name: '',
         password: ''
       },
-      show: true,
+      token: null,
       nameError: '',
+      emailError: '',
       passwordError: ''
     }
   },  
@@ -67,39 +75,75 @@ export default {
     validationName () {
       return this.form.name.length >= 2 && this.form.name.length <= 100
     },
+    validationEmail () {
+      return this.form.email.includes("@") 
+      // && !(this.form.email.startsWith('@'))
+    },
     validationPassword () {
-      return this.form.password.length >= 6
+      return this.form.password.length >= 4
     }
   },
   methods: {
-    onSubmit (event) {
-      event.preventDefault()
-      console.log(JSON.stringify(this.form))
-    },
+    
     handleBlurName () {
       this.nameError = this.$t('registerPage.nameError')
     },
+    handleBlurEmail () {
+      this.emailError = this.$t('registerPage.emailError')
+    },
     handleBlurPassword () {
       this.passwordError = this.$t('registerPage.passwordError')
-    }
+    },
+
+    // mounted() {
+      
+      
+    onSubmit (event) {
+      event.preventDefault()
+      if (!this.validationName || !this.validationEmail || !this.validationPassword) {
+        // Alert("Error in input!!! Try again")
+        
+        console.log("Hi, not so clever")
+        console.log(this.nameError)
+      }
+        else {
+          console.log("Hi, clever")
+        
+        
+          console.log(JSON.stringify(this.form))
+          
+          axios ({
+            method: 'post',
+            url: 'http://80.87.192.59:5252/api/auth/register',
+            data: {
+              name: this.form.name,
+              email: this.form.email,
+              password: this.form.password
+            // Bearer: access_token,
+            }
+          })
+          .then(response => {
+            console.log(response.data)
+            console.log(response.status)
+            this.token = response.data
+            
+            this.$router.push('/Login')   
+          })
+          .catch(error => {
+          console.log(error)
+          })
+        }
+          
+          
+      this.$router.push('/Wallet')    
+      console.log(`token = ${this.token}`)
+      }
+        
+    // }
   }
+
 }
 
-// const {resolve} = require('path');
-
-// module.exports = function nuxtVueWaitModule(moduleOptions) {
-//     const options = Object.assign({}, this.options.wait, moduleOptions);
-
-//     // Register plugin
-//     this.addPlugin({
-//         src: resolve(__dirname, 'vue-wait-plugin.template.js'),
-//         fileName: 'vue-wait-plugin.js',
-//         options: options
-//     })
-// };
-
-// // required by nuxt
-// module.exports.meta = require('../package.json');
 
 </script>
 

@@ -9,7 +9,7 @@
         <b-navbar-nav class="custom-nav">
           
           <b-nav-item>
-            <nuxt-link exact active-class="active" class="nav-link " :to="localePath('/')">
+            <nuxt-link exact active-class="active" class="nav-link " :to="localePath('/Wallet')">
               {{ $t('navbar.wallet') }}
             </nuxt-link>
           </b-nav-item>
