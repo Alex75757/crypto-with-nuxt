@@ -1,5 +1,8 @@
 <template>
   <div>
+    
+  <progress-bar v-if="$wait.any">Please wait...</progress-bar>
+
     <b-form @click="onSubmit">
       <b-form  class="Group13">
       

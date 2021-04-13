@@ -1,4 +1,7 @@
 <template>
+
+<div>  
+<progress-bar v-if="$wait.any">Please wait...</progress-bar>
   <div v-if="$store.state.success">
       <b-card-group deck class="Group13">    
           <b-card 
@@ -31,7 +34,7 @@
         </b-card-group>
    
   </div>
-  
+</div>  
 </template>
 
 <script>

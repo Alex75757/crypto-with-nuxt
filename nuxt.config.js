@@ -40,7 +40,7 @@ export default {
     'nuxt-i18n',
     'vue-wait/nuxt'
 
-    ['vue-wait/nuxt', {useVuex: true}]
+    // ['vue-wait/nuxt', {useVuex: true}]
 
   ],
 
